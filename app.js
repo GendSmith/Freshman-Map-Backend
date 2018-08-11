@@ -12,6 +12,12 @@ app.use(cookieParser());
 
 app.use("/",router);
 
-http.createServer(app).listen(config.port);
+try{
+    app.listen(config.port);
+    console.log("service start！");
+} catch(err) {
+    console.log(err);
+}
+
 
 

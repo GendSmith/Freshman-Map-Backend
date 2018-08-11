@@ -1,6 +1,6 @@
 const DEBUG = true;
 
-const port = 3001;
+const port = 6699;
 
 const mysqlOptions = {
     host:"newsysu.cn",
