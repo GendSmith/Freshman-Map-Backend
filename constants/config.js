@@ -1,15 +1,24 @@
+
 const DEBUG = true;
+const DOMAIN = DEBUG ? "http://localhost:8080" : "http://newsysu.cn";
 
 const port = 6699;
 
-const mysqlOptions = {
-    host:"newsysu.cn",
-    uer:"root",
+const MYSQL_OPTIONS = {
+    host:"139.199.79.39",
+    user:"root",
     password:"newsysu",
     database:"newsysu",
     port:3306
 }
 
+const CORS_OPTIONS = {
+    origin: DOMAIN,
+    methods: "GET, POST"
+  };
+
 module.exports = {
-    port:port
+    port:port,
+    CORES_OPTIONS:CORS_OPTIONS,
+    MYSQL_OPTIONS:MYSQL_OPTIONS
 }
