@@ -4,8 +4,10 @@ const LOGIN_SQL = "SELECT * FROM user_info WHERE id = ?";
 const {NO_USER, WRONG_USER, RIGHT_USER} = require("../constants/status");
 function login(req, res) {
   console.log("call login ");
-  console.log(req.body);
+  // console.log(req.body);
+  // console.log(req.cookies);
   const body = req.body;
+  console.log(body);
   const options = [req.body.schoolID];
   mysql
     .queue([
@@ -25,14 +27,17 @@ function login(req, res) {
           console.log("信息不匹配");
           return res.json(WRONG_USER);
         } else {
-            console.log("查询成功");
+          req.session.userId = info.id;
+          console.log(info.id);
+          //console.log(res.cookie.get("userName"));
+          console.log("查询成功");
           return res.json(RIGHT_USER);
         }
       }
     ])
     .catch(function(err) {
-      return res.json(NO_USER);
       console.log(err);
+      return res.json(NO_USER);
     });
 }
 
