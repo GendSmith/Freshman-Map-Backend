@@ -10,6 +10,32 @@ const {GET_POINT_FAIL, GET_POINT_SUCCESS} = require("../constants/status");
 function point(req, res) {
   const {body: {college, campus, id}} = req;
   console.log(campus, college);
+  let progress = {
+    study: {
+      num: POINT_NUM[college],
+      finish: 0,
+      point: [],
+      isFinish: false
+    },
+    famous: {
+      num: POINT_NUM[college],
+      finish: 0,
+      point: [],
+      isFinish: false
+    },
+    activity: {
+      num: POINT_NUM[college],
+      finish: 0,
+      point: [],
+      isFinish: false
+    },
+    life: {
+      num: POINT_NUM[college],
+      finish: 0,
+      point: [],
+      isFinish: false
+    }
+  };
 
   mysql
     .queue([
@@ -27,49 +53,26 @@ function point(req, res) {
     .then(function({totalResults}) {
 
       console.log(totalResults[0]);
+      console.log(totalResults[1]);
 
-      return res.json({msg:"success"})
+      //return res.json({msg:"success"})
 
-      // let progress = {
-      //   study: {
-      //     num: POINT_NUM[college],
-      //     finish: 0,
-      //     point: [],
-      //     isFinish: false
-      //   },
-      //   famous: {
-      //     num: POINT_NUM[college],
-      //     finish: 0,
-      //     point: [],
-      //     isFinish: false
-      //   },
-      //   activity: {
-      //     num: POINT_NUM[college],
-      //     finish: 0,
-      //     point: [],
-      //     isFinish: false
-      //   },
-      //   life: {
-      //     num: POINT_NUM[college],
-      //     finish: 0,
-      //     point: [],
-      //     isFinish: false
-      //   }
-      // };
-      // //统计进度
-      // for (let i = 0; i < recordInfo.length; i++) {
-      //   progress[recordInfo[i].type].finish++;
-      //   progress[recordInfo[i].type].point.push(recordInfo[i].point);
-      // }
+      
+      //统计进度
+      for (let i = 0; i < totalResults[1].length; i++) {
+        progress[totalResults[1][i].type].finish++;
+        progress[totalResults[1][i].type].point.push(totalResults[1][i].point);
+      }
 
-      // console.log(progress);
+      console.log(progress);
 
-      // const params = {
-      //   pointInfo,
-      //   progress
-      // };
+      const params = {
+        ...totalResults[0],
+        ...progress
+      };
+      console.log(params);
 
-      // return res.json(params);
+      return res.json(params);
     })
     .catch(function(err) {
       console.log(err);
