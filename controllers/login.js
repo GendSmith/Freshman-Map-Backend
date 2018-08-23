@@ -15,7 +15,7 @@ function login(req, res) {
         order: LOGIN_SQL,
         argument: options,
         output: "userInfo"
-      },
+      }
     ])
     .then(function(output) {
       const info = output.userInfo[0];

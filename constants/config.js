@@ -26,19 +26,19 @@ const CAMPUS = {
 };
 
 const POINT_NUM = {
-  "物理学院": {
+  物理学院: {
     famous: 6,
     activity: 6,
     life: 6,
     study: 6
   },
-  "心理学系": {
+  心理学系: {
     famous: 6,
     activity: 6,
     life: 6,
     study: 6
   },
-  "药学院": {
+  药学院: {
     famous: 6,
     activity: 6,
     life: 6,
