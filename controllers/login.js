@@ -17,8 +17,12 @@ function login(req, res) {
         output: "userInfo"
       }
     ])
-    .then(function(output) {
-      const info = output.userInfo[0];
+    .then(function({totalResults}) {
+      console.log(totalResults[0]);
+     // return res.json(NO_USER);
+
+      const info = totalResults[0][0];
+      console.log(info.name);
       console.log(info);
       if (
         info == undefined ||
