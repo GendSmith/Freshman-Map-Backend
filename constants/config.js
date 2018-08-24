@@ -1,4 +1,4 @@
-const DEBUG = true;
+const DEBUG = false;
 const DOMAIN = DEBUG ? "http://localhost:8080" : "http://newsysu.cn:8080";
 
 const port = 6700;
