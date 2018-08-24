@@ -1,7 +1,7 @@
 const DEBUG = true;
-const DOMAIN = DEBUG ? "http://localhost:8080" : "http://newsysu.cn";
+const DOMAIN = DEBUG ? "http://localhost:8080" : "http://newsysu.cn:8080";
 
-const port = 6699;
+const port = 6700;
 
 const MYSQL_OPTIONS = {
   host: "139.199.79.39",

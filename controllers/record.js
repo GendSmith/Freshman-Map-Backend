@@ -1,15 +1,15 @@
 const mysql = require("../utils/mysql");
 const {CARD_FAIL, CARD_SUCCESS} = require("../constants/status");
 const INSERT_RECORD_SQL =
-  "INSERT INTO record (id,type,point,finish_timestamp) VALUES(?,?,?,now())";
+  "INSERT INTO record (id,type,point_name,lng,lat,finish_timestamp) VALUES(?,?,?,?,?,now())";
 
 function record(req, res) {
-  const {id, type, point} = req.body;
+  const {id, type, pointName,lng,lat} = req.body;
   mysql
     .queue([
       {
         order: INSERT_RECORD_SQL,
-        arguments: [id, type, point]
+        arguments: [id, type, pointName,lng,lat]
       }
     ])
     .then(function({totalResults}) {
