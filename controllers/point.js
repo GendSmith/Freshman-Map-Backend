@@ -14,25 +14,25 @@ function point(req, res) {
     study: {
       num: POINT_NUM[college],
       finish: 0,
-      pointID: [],
+      imgUrl: [],
       isFinish: false
     },
-    famous: {
+    architecture: {
       num: POINT_NUM[college],
       finish: 0,
-      pointID: [],
+      imgUrl: [],
       isFinish: false
     },
     activity: {
       num: POINT_NUM[college],
       finish: 0,
-      pointID: [],
+      imgUrl: [],
       isFinish: false
     },
     life: {
       num: POINT_NUM[college],
       finish: 0,
-      pointID: [],
+      imgUrl: [],
       isFinish: false
     }
   };
@@ -56,8 +56,10 @@ function point(req, res) {
 
       //统计进度
       for (let i = 0; i < totalResults[1].length; i++) {
-        progress[totalResults[1][i].type].finish++;
-        progress[totalResults[1][i].type].pointID.push(totalResults[1][i].id);
+        console.log(totalResults[1][i]);
+        console.log(totalResults[1][i].type);
+        progress[(totalResults[1][i].type).toString()].finish++;
+        progress[(totalResults[1][i].type).toString()].imgUrl.push(totalResults[1][i].img_url);
       }
 
       console.log(progress);

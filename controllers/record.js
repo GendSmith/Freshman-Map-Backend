@@ -1,7 +1,9 @@
 const mysql = require("../utils/mysql");
 const {CARD_FAIL, CARD_SUCCESS} = require("../constants/status");
+const SELECT_RECORD_SQL = 
+"SELECT * FROM record WHERE id=?";
 const INSERT_RECORD_SQL =
-  "INSERT INTO record (id,type,img_url,lng,lat,finish_timestamp) VALUES(?,?,?,?,?,now())";
+  "insert into record (id,type,img_url,lng,lat) values(?,?,?,?,?)";
 
 function record(req, res) {
   const {id, type, imgUrl,lng,lat} = req.body;
@@ -9,11 +11,16 @@ function record(req, res) {
     .queue([
       {
         order: INSERT_RECORD_SQL,
-        arguments: [id, type, imgUrl,lng,lat]
+        argument: [id, type, imgUrl,lng,lat]
       }
     ])
     .then(function({totalResults}) {
-      return res.json(CARD_SUCCESS);
+      const params = {
+        imgUrl,
+        
+        CARD_SUCCESS
+      }
+      return res.json(params);
     })
     .catch(function(err) {
       console.log(err);
