@@ -1,9 +1,10 @@
 const mysql = require("../utils/mysql");
-
+const SELECT_RANK_SQL = "select rank from user_info where id=? limit 1";
 const SELECT_MAXRANK_SQL = "select max(rank) from user_info limit 1";
-const UPDATE_RANK_SQL = "update user_info set rank = ? where id=?";
+const UPDATE_RANK_SQL = "update user_info set rank = ? where id=? and rank=0";
 
 function rank(req, res) {
+  console.log("rank.js");
   const {id} = req.body;
   mysql
     .queue([
@@ -13,12 +14,9 @@ function rank(req, res) {
         output: "maxRank"
       },
       function({maxRank}) {
-        //console.log(maxRank[0]["max(rank)"]);
         let order = [];
         if (maxRank.length == 1) {
-          //console.log(maxRank[0]);
           let max = maxRank[0]["max(rank)"] + 1;
-          //console.log(max);
           order.push({
             order: UPDATE_RANK_SQL,
             argument: [max, id]
@@ -38,6 +36,7 @@ function rank(req, res) {
       return res.json(params);
     })
     .catch(function(err) {
+      console.log("error:");
       console.log(err);
       return res.json({CODE: 400, MSG: "排名失败"});
     });

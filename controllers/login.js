@@ -19,7 +19,7 @@ function login(req, res) {
     ])
     .then(function({totalResults}) {
       console.log(totalResults[0]);
-     // return res.json(NO_USER);
+      // return res.json(NO_USER);
 
       const info = totalResults[0][0];
       console.log(info.name);
@@ -36,7 +36,7 @@ function login(req, res) {
         console.log(info.id);
         //console.log(res.cookie.get("userName"));
         console.log("查询成功");
-        return res.json(RIGHT_USER);
+        return res.json({...RIGHT_USER, rank: info.rank});
       }
     })
     .catch(function(err) {

@@ -9,7 +9,7 @@ const {GET_POINT_FAIL, GET_POINT_SUCCESS} = require("../constants/status");
 
 function point(req, res) {
   const {body: {college, campus, id}} = req;
-  console.log(campus, college);
+  //console.log(campus, college);
   let progress = {
     study: {
       num: POINT_NUM[college],
@@ -51,25 +51,27 @@ function point(req, res) {
       }
     ])
     .then(function({totalResults}) {
-      console.log(totalResults[0]);
-      console.log(totalResults[1]);
+      // console.log(totalResults[0]);
+      // console.log(totalResults[1]);
 
       //统计进度
       for (let i = 0; i < totalResults[1].length; i++) {
         console.log(totalResults[1][i]);
         console.log(totalResults[1][i].type);
-        progress[(totalResults[1][i].type).toString()].finish++;
-        progress[(totalResults[1][i].type).toString()].imgUrl.push(totalResults[1][i].img_url);
+        progress[totalResults[1][i].type.toString()].finish++;
+        progress[totalResults[1][i].type.toString()].imgUrl.push(
+          totalResults[1][i].img_url
+        );
       }
 
-      console.log(progress);
+      //console.log(progress);
 
       const params = {
         pointInfo: totalResults[0],
         progress,
         GET_POINT_SUCCESS
       };
-      console.log(params);
+      //console.log(params);
 
       return res.json(params);
     })
