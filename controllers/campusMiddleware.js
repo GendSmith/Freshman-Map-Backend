@@ -2,6 +2,7 @@ const {CAMPUS} = require("../constants/config");
 
 function campus(req, res, next) {
   const college = req.body.college;
+  console.log(req.body);
   if (college == "心理学系") req.body.campus = "east";
   if (college == "物理学院") req.body.campus = "south";
   if (college == "药学院") req.body.campus = "east";

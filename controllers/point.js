@@ -9,7 +9,7 @@ const {GET_POINT_FAIL, GET_POINT_SUCCESS} = require("../constants/status");
 
 function point(req, res) {
   const {body: {college, campus, id}} = req;
-  //console.log(campus, college);
+  console.log(campus, college);
   let progress = {
     study: {
       num: POINT_NUM[college],
@@ -41,7 +41,7 @@ function point(req, res) {
     .queue([
       {
         order: GET_POINT_INFO_SQL,
-        argument: ["south", "物理学院"],
+        argument: [campus, college],
         otuput: "pointInfo"
       },
       {
