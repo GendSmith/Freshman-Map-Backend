@@ -1,7 +1,5 @@
 const mysql = require("../utils/mysql");
 const {CARD_FAIL, CARD_SUCCESS} = require("../constants/status");
-const SELECT_RECORD_SQL = 
-"SELECT * FROM record WHERE id=?";
 const INSERT_RECORD_SQL =
   "insert into record (id,type,img_url,lng,lat) values(?,?,?,?,?)";
 
